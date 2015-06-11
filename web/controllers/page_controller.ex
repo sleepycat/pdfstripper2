@@ -28,7 +28,7 @@ defmodule Pdfstripper2.PageController do
       |> send_file(200, "fixed1.pdf")
     else
       conn
-      |> put_status("400")
+      |> put_status(400)
       |> text "That is not a PDF."
     end
   end
