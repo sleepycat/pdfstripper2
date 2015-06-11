@@ -12,7 +12,7 @@ defmodule Pdfstripper2.PageController do
   # XXX: refactor this into separate functions
   def process conn, params do
     {type, exit} = System.cmd "file", ["-b", params["pdf"].path]
-    if String.match?("PDF document, version 1.1", ~r/\APDF document, version \d\.\d\n\z/) do
+    if String.match?(type, ~r/\APDF document, version \d\.\d\n\z/) do
       #XXX: create a tempfile for the output.
       options = [
         "-q", "-dNOPAUSE", "-dSAFER", "-dBATCH", "-sDEVICE=pdfwrite",
