@@ -1,0 +1,16 @@
+<div class="title">
+  <h2>PDF permissions remover</h2>
+</div>
+
+<div class="form">
+  <%= form_tag("/process", method: :post, enctype: "multipart/form-data") %>
+    <input type="file" name="pdf"></input>
+    <input type="submit" value="Clean this PDF!"></input>
+  </form>
+</div>
+
+  <p class="explanation">
+    This site will remove encryption as well as restrictions on
+    copy/paste and printing from PDF files.
+    <br/> We do not keep any of the files you upload. Ever.
+  </p>
