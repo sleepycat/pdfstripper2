@@ -1,4 +1,4 @@
-%{"Tempfile": {:git, "git://github.com/glejeune/tempfile.git", "00b4174ffc167b644942a66c6c66e67d1a1fdf6b", []},
+%{"Tempfile": {:git, "git://github.com/sleepycat/tempfile.git", "c454c58d837d75d618896aa155c8e233dbf17480", []},
   "cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
   "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "0cc3072379fea37127987df13ff791bc14ca7f75", []},
@@ -9,4 +9,4 @@
   "plug": {:hex, :plug, "0.13.0"},
   "poison": {:hex, :poison, "1.4.0"},
   "ranch": {:hex, :ranch, "1.0.0"},
-  "tempfile": {:git, "git://github.com/glejeune/tempfile.git", "00b4174ffc167b644942a66c6c66e67d1a1fdf6b", []}}
+  "tempfile": {:git, "git://github.com/sleepycat/tempfile.git", "d0968546cd9fc9eef8fbc969cbe59d9ba403158a", []}}

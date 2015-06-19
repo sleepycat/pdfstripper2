@@ -13,10 +13,10 @@ defmodule Pdfstripper2.PageController do
   def process conn, params do
     {type, exit} = System.cmd "file", ["-b", params["pdf"].path]
     if String.match?(type, ~r/\APDF document, version \d\.\d\n\z/) do
-      #XXX: create a tempfile for the output.
+      {:ok, _tempfile, tempfile_path} = Tempfile.open
       options = [
         "-q", "-dNOPAUSE", "-dSAFER", "-dBATCH", "-sDEVICE=pdfwrite",
-        "-sOutputFile=fixed1.pdf", "-c .setpdfwrite", "-f", params["pdf"].path
+        "-sOutputFile=#{tempfile_path}", "-c .setpdfwrite", "-f", params["pdf"].path
       ]
 
       [filename, _extensions] = String.split(params["pdf"].filename, ".")
@@ -25,7 +25,7 @@ defmodule Pdfstripper2.PageController do
       conn
       |> put_resp_header("content-type", "application/pdf")
       |> put_resp_header("content-disposition", "attachment; filename=#{finished_filename}")
-      |> send_file(200, "fixed1.pdf")
+      |> send_file(200, tempfile_path)
     else
       conn
       |> put_status(400)

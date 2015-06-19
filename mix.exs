@@ -36,7 +36,8 @@ defmodule Pdfstripper2.Mixfile do
       {:phoenix, "~> 0.13.1"},
       {:phoenix_html, "~> 1.0"},
       {:phoenix_live_reload, "~> 0.4", only: :dev},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:tempfile, github: "sleepycat/tempfile"}
     ]
   end
 end
