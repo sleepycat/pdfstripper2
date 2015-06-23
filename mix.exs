@@ -20,7 +20,7 @@ defmodule Pdfstripper2.Mixfile do
   def application do
     [
       mod: {Pdfstripper2, []},
-      applications: [:phoenix, :phoenix_html, :cowboy, :logger]
+      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :sasl]
     ]
   end
 
@@ -37,7 +37,8 @@ defmodule Pdfstripper2.Mixfile do
       {:phoenix_html, "~> 1.0"},
       {:phoenix_live_reload, "~> 0.4", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:tempfile, github: "sleepycat/tempfile"}
+      {:tempfile, github: "sleepycat/tempfile"},
+      {:exrm, "~> 0.15.3"}
     ]
   end
 end
