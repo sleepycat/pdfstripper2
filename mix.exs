@@ -20,7 +20,7 @@ defmodule Pdfstripper2.Mixfile do
   def application do
     [
       mod: {Pdfstripper2, []},
-      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :sasl]
+      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :sasl, :tempfile]
     ]
   end
 
