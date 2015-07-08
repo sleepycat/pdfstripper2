@@ -28,8 +28,8 @@ defmodule Pdfstripper2.PageController do
       |> send_file(200, tempfile_path)
     else
       conn
-      |> put_status(400)
-      |> text "That is not a PDF."
+      |> put_flash(:error, "That does not appear to be a PDF.")
+      |> redirect to: "/"
     end
   end
 
