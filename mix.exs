@@ -4,7 +4,7 @@ defmodule Pdfstripper2.Mixfile do
   def project do
     [
       app: :pdfstripper2,
-      version: "0.0.2",
+      version: "1.0.0",
       elixir: "~> 1.0",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix] ++ Mix.compilers,
