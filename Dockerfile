@@ -12,7 +12,7 @@ ENV LANG en_US.UTF-8
 RUN pacman -S --noconfirm reflector
 RUN reflector --country 'United States' -l 10 -p https --sort rate --save /etc/pacman.d/mirrorlist
 RUN pacman -Syu --noconfirm
-RUN pacman -S --noconfirm ghostscript
+RUN pacman -S --noconfirm ghostscript file
 
 RUN groupadd elixir
 RUN useradd -m -g elixir -s /usr/bin/nologin elixir
