@@ -9,10 +9,8 @@ defmodule Pdfstripper2.PageController do
     conn |> render "index.html"
   end
 
-  # XXX: refactor this into separate functions
   def process conn, params do
-    {type, exit} = System.cmd "file", ["-b", params["pdf"].path]
-    if String.match?(type, ~r/\APDF document, version \d\.\d\n\z/) do
+    if is_pdf? params["pdf"].path do
       {:ok, _tempfile, tempfile_path} = Tempfile.open
       options = [
         "-q", "-dNOPAUSE", "-dSAFER", "-dBATCH", "-sDEVICE=pdfwrite",
@@ -29,6 +27,15 @@ defmodule Pdfstripper2.PageController do
       conn
       |> put_flash(:error, "That does not appear to be a PDF.")
       |> redirect to: "/"
+    end
+  end
+
+  defp is_pdf? path do
+    {type, exit} = System.cmd "file", ["-b", path]
+    if String.match?(type, ~r/\APDF document, version \d\.\d\n\z/) do
+      true
+    else
+      false
     end
   end
 
