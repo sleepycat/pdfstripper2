@@ -12,13 +12,10 @@ defmodule Pdfstripper2.PageController do
   def process conn, params do
     if is_pdf? params["pdf"].path do
       {:ok, _tempfile, tempfile_path} = Tempfile.open
-      options = [
-        "-q", "-dNOPAUSE", "-dSAFER", "-dBATCH", "-sDEVICE=pdfwrite",
-        "-sOutputFile=#{tempfile_path}", "-c .setpdfwrite", "-f", params["pdf"].path
-      ]
 
       finished_filename = output_filename(params["pdf"].filename)
-      {result, _exit_status} = System.cmd("/usr/bin/gs", options)
+      {result, _exit_status} = rewrite_pdf(tempfile_path, params["pdf"].path)
+
       conn
       |> put_resp_header("content-type", "application/pdf")
       |> put_resp_header("content-disposition", "attachment; filename=#{finished_filename}")
@@ -28,6 +25,14 @@ defmodule Pdfstripper2.PageController do
       |> put_flash(:error, "That does not appear to be a PDF.")
       |> redirect to: "/"
     end
+  end
+
+  defp rewrite_pdf output_path, input_path do
+      options = [
+        "-q", "-dNOPAUSE", "-dSAFER", "-dBATCH", "-sDEVICE=pdfwrite",
+        "-sOutputFile=#{output_path}", "-c .setpdfwrite", "-f", input_path
+      ]
+      System.cmd("/usr/bin/gs", options)
   end
 
   defp is_pdf? path do
