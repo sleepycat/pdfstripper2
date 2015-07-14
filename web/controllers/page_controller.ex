@@ -14,7 +14,7 @@ defmodule Pdfstripper2.PageController do
       {:ok, _tempfile, tempfile_path} = Tempfile.open
 
       finished_filename = output_filename(params["pdf"].filename)
-      {result, _exit_status} = rewrite_pdf(tempfile_path, params["pdf"].path)
+      {_result, _exit_status} = rewrite_pdf(tempfile_path, params["pdf"].path)
 
       conn
       |> put_resp_header("content-type", "application/pdf")
@@ -36,7 +36,7 @@ defmodule Pdfstripper2.PageController do
   end
 
   defp is_pdf? path do
-    {type, exit} = System.cmd "file", ["-b", path]
+    {type, _exit} = System.cmd "file", ["-b", path]
     if String.match?(type, ~r/\APDF document, version \d\.\d\n\z/) do
       true
     else
