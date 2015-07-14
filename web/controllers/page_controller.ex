@@ -19,8 +19,7 @@ defmodule Pdfstripper2.PageController do
         "-sOutputFile=#{tempfile_path}", "-c .setpdfwrite", "-f", params["pdf"].path
       ]
 
-      [filename, _extensions] = String.split(params["pdf"].filename, ".")
-      finished_filename = "#{filename}_fixed.pdf"
+      finished_filename = output_filename(params["pdf"].filename)
       {result, _exit_status} = System.cmd("/usr/bin/gs", options)
       conn
       |> put_resp_header("content-type", "application/pdf")
@@ -31,6 +30,11 @@ defmodule Pdfstripper2.PageController do
       |> put_flash(:error, "That does not appear to be a PDF.")
       |> redirect to: "/"
     end
+  end
+
+  defp output_filename current do
+    [filename, _extensions] = String.split(current, ".")
+    "#{filename}_fixed.pdf"
   end
 
 end
