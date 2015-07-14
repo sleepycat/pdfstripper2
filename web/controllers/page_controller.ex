@@ -36,7 +36,7 @@ defmodule Pdfstripper2.PageController do
   end
 
   defp is_pdf? path do
-    {type, _exit} = System.cmd "file", ["-b", path]
+    {type, _exit} = System.cmd "/usr/bin/file", ["-b", path]
     if String.match?(type, ~r/\APDF document, version \d\.\d\n\z/) do
       true
     else
