@@ -45,7 +45,7 @@ defmodule Pdfstripper2.PageController do
   end
 
   defp output_filename current do
-    [filename, _extensions] = String.split(current, ".")
+    filename = Path.basename(current, Path.extname(current))
     "#{filename}_fixed.pdf"
   end
 
