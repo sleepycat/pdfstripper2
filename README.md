@@ -14,3 +14,11 @@ To start your new Phoenix application:
 2. Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit `localhost:4000` from your browser.
+
+There is a Docker container built with the Dockerfile in the project
+root. You can pull and run the app locally with the command:
+
+```sh
+docker run -t -p=4000:4000 mikewilliamson/pdfstripper
+firefox localhost:4000
+```
