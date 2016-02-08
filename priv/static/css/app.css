@@ -25,6 +25,15 @@ form.link, form.button {
   display: inline;
 }
 
+input[type=file] {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  margin: 1em 0em;
+  overflow: hidden;
+  border-radius: 0.2em;
+  box-shadow: 0 0 0px 5px rgba(20, 28, 34, .1);
+}
+
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
@@ -89,3 +98,4 @@ html, body, .container{
     border-bottom: 0;
   }
 }
+
