@@ -10,9 +10,9 @@ ENV PATH /usr/bin:/usr/sbin
 ENV LANG en_US.UTF-8
 
 RUN pacman -S --noconfirm reflector
-RUN reflector --country 'United States' -l 10 -p https --sort rate --save /etc/pacman.d/mirrorlist
+RUN reflector --country 'United States' -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
 RUN pacman -Syu --noconfirm
-RUN pacman -S --noconfirm ghostscript file
+RUN pacman -S --noconfirm ghostscript file ncurses
 
 RUN groupadd elixir
 RUN useradd -m -g elixir -s /usr/bin/nologin elixir
