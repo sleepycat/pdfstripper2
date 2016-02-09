@@ -4,7 +4,7 @@
 
 <div class="form">
   <%= form_tag("/process", method: :post, enctype: "multipart/form-data") %>
-    <input type="file" name="pdf"></input>
+    <input type="file" name="pdf"></input></br>
     <input type="submit" value="Clean this PDF!"></input>
   </form>
 </div>

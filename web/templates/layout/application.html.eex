@@ -12,7 +12,9 @@
   </head>
 
   <body>
-    <div class="container" role="main">
+<div class="outer">
+  <div class="middle">
+    <div class="container inner">
       <div class="header">
         <img class="logo" src="<%= static_path(@conn, "/images/pdf.svg") %>" />
       </div>
@@ -21,8 +23,10 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <%= @inner %>
+    </div>
+  </div>
+</div>
 
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script>require("web/static/js/app")</script>
     <script>
