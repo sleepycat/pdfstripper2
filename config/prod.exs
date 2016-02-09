@@ -14,7 +14,11 @@ use Mix.Config
 config :pdfstripper2, Pdfstripper2.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "www.pdf-permissions-remover.com"],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
+  force_ssl: [hsts: true],
+  https: [port: 443,
+          keyfile: System.get_env("PDFSTRIPPER_SSL_KEY_PATH"),
+          certfile: System.get_env("PDFSTRIPPER_SSL_CERT_PATH")]
 
 # ## SSL Support
 #
