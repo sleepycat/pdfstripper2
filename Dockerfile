@@ -1,26 +1,24 @@
 # Run with -t:
 # docker run -p=4000:4000 -t mikewilliamson/pdfstripper
 #
-FROM mikewilliamson/archlinux
+FROM gliderlabs/alpine:3.3
 
 ENV PORT 4000
-ENV MIX_ENV prod
-ENV PATH /usr/bin:/usr/sbin
+ENV MIX_ENV dev
 # Elixir expects utf8
 ENV LANG en_US.UTF-8
 
-RUN pacman -S --noconfirm reflector
-RUN reflector --country 'United States' -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
-RUN pacman -Syu --noconfirm
-RUN pacman -S --noconfirm ghostscript file ncurses
+RUN apk add -U git=2.6.4-r0 erlang-crypto=18.1-r5 elixir=1.1.1-r0 ghostscript-fonts=8.11-r1 ghostscript=9.18-r0 file=5.25-r0  && rm -rf /var/cache/apk/*
 
-RUN groupadd elixir
-RUN useradd -m -g elixir -s /usr/bin/nologin elixir
+RUN addgroup -S elixir
+RUN adduser -S elixir -G elixir
 
-RUN mkdir -p /home/elixir/pdfstripper2
-COPY ./rel/pdfstripper2/ /home/elixir/pdfstripper2/
-RUN chown -R elixir:elixir /home/elixir/pdfstripper2
+RUN mkdir -p /home/elixir/pdfstripper
+COPY ./ /home/elixir/pdfstripper
+RUN chown -R elixir:elixir /home/elixir
+WORKDIR /home/elixir/pdfstripper
+USER elixir
+RUN yes | mix local.hex && mix deps.get
 
 EXPOSE 4000
-USER elixir
-CMD ["/home/elixir/pdfstripper2/bin/pdfstripper2", "foreground"]
+CMD mix phoenix.server
